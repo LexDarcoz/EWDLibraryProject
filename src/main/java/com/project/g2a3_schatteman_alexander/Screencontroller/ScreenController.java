@@ -7,13 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ScreenController {
 
-    @GetMapping("/bookdetailpage")
+    @GetMapping("/BookDetailPage")
     public String showDetails() {
-        return "bookdetailpage";
+        return "BookDetailPage";
     }
 
     @GetMapping("/LibraryBooks")
     public String showLibrary() {
         return "LibraryBooks";
     }
+
+    @GetMapping("/list-employees")
+    public String showListEmployees() {
+        return "list-employees";
+    }
+
+
 }
