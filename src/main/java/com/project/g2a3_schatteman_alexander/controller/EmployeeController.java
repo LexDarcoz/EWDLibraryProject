@@ -6,6 +6,8 @@ import com.project.g2a3_schatteman_alexander.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -32,6 +34,12 @@ public class EmployeeController {
         Employee newEmployee = new Employee();
         mav.addObject("employee", newEmployee);
         return mav;
+    }
+
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute Employee employee) {
+        eRepo.save(employee);
+        return "redirect:/list";
     }
 
 

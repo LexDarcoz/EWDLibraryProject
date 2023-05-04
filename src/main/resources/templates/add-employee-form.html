@@ -14,9 +14,9 @@
     <h2>Add Employee</h2>
     <hr/>
     <form method="post" th:action="@{/saveEmployee}" th:object="${employee}">
-        <input class="form-control col-4 mb-4" placeholder="Enter name" th:filed="*{name}" type="text">
-        <input class="form-control col-4 mb-4" placeholder="Enter email" th:filed="*{email}" type="text">
-        <input class="form-control col-4 mb-4" placeholder="Enter department" th:filed="*{department}" type="text">
+        <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
+        <input class="form-control col-4 mb-4" placeholder="Enter email" th:field="*{email}" type="text">
+        <input class="form-control col-4 mb-4" placeholder="Enter department" th:field="*{department}" type="text">
 
         <button class="btn btn-primary" type="submit">Save</button>
     </form>
