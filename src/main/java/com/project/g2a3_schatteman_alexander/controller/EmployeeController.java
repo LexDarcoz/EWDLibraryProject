@@ -20,12 +20,6 @@ public class EmployeeController {
     private EmployeeRepository eRepo;
 
 
-    @GetMapping({"/home", "/"})
-    public ModelAndView showLandingPage() {
-        ModelAndView mav = new ModelAndView("landingPage");
-        return mav;
-    }
-
     @GetMapping({"/showEmployees", "/list"})
     public ModelAndView showEmployees() {
         ModelAndView mav = new ModelAndView("employees/list-employees");

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-bs-target="#navbarTogglerDemo03" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">ISBN</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link active" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="addBook">Add book</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+             id="navbarDropdown" role="button">
+            Account
+          </a>
+          <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Edit account</a></li>
+            <li><a class="dropdown-item" href="#">Wishlist</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input aria-label="Search" class="form-control me-2" placeholder="Search" type="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container">
+
+  <h2>Add Employee</h2>
+  <hr/>
+  <form method="post" th:action="@{/saveEmployee}" th:object="${book}">
+    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
+    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{authors}" type="text">
+    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{price}" type="text">
+    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
+    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
+
+
+
+
+    <button class="btn btn-primary" type="submit">Save</button>
+    <input th:field="*{id}" type="hidden">
+  </form>
+  <hr/>
+  <a class="btn btn-error" th:href="@{/showEmployees}">Back to list</a>
+
+</div>
+</body>
+</html>
+</body>
+</html>

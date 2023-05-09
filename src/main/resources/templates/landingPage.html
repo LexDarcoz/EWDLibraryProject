@@ -27,10 +27,7 @@
                     <a aria-current="page" class="nav-link active" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="showEmployees">Employee List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="addEmployeeForm">Add book</a>
+                    <a class="nav-link" href="addBook">Add book</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
@@ -54,6 +51,69 @@
         </div>
     </div>
 </nav>
+
+
+<div class="container">
+    <h2>List Of Books</h2>
+    <hr/>
+
+    <a class="btn btn-primary mb-2" th:href="@{/addBook}">Add Book</a>
+    <br/>
+
+    <table class="table table-bordered table-striped" id="employeeTable">
+
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Author(s)</th>
+            <th>ISBN</th>
+            <th>Price</th>
+            <th>Stars</th>
+            <th>Location</th>
+
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="books: ${books}">
+            <td th:text="${books.getISBN_number()}"/>
+            <td>
+            <span th:each="authors : ${books.getAuthors()()}">
+
+<span th:text="${authors.g}"></span>
+            </span>
+            </td>
+            <td th:text="${books.price}"/>
+            <td th:text="${books.stars}"/>
+            <td>
+            <span th:each="location : ${books.getLocation()}">
+                    <span th:text="${location.getPlaatsNaam()}"></span>
+                <span th:text="${location.getPlaatsCode1()}"></span>
+                <span th:text="${location.getPlaatsCode2()}"></span>
+
+            </span>
+            </td>
+            <td>
+                <a class="btn btn-success" th:href="@{/showUpdateForm(employeeId=${employee.id})}">Update</a>
+
+                <a class="btn btn-danger ml-3" th:href="@{/deleteEmployee(employeeId=${employee.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#employeeTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    })
+</script>
 
 </body>
 </html>
