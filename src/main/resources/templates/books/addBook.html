@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+  <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+  <script crossorigin="anonymous"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,8 +59,44 @@
     <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
     <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{authors}" type="text">
     <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{price}" type="text">
-    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
-    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
+    <div th:each="author, status : *{authors}" class="form-group m-5 gap-2" id="authorContainer">
+      <label th:text="#{author} + ' ' + (${status.index} + 1) + ':'"></label>
+      <input type="text" th:field="*{authors[__${status.index}__].firstname}" placeholder="First name"
+             class="form-control ms-5 me-5 mb-1"/>
+      <input type="text" th:field="*{authors[__${status.index}__].lastname}" placeholder="Last name"
+             class="form-control ms-5 me-5"/>
+      <span th:errors="*{authors}"></span>
+      <br/>
+    </div>
+    <div class="form-group m-5">
+      <label for="ISBNnumber" th:text="ISBN"></label>
+      <input type="text" id="ISBNnumber" name="ISBNnumber" th:value="*{ISBNnumber}"
+             class="form-control ms-5 me-5" th:placeholder="ISBN"
+             required>
+      <span th:errors="*{ISBNnumber}" class="text-danger"></span>
+      <br>
+      <label for="price" th:text="#{price}"></label>
+      <input type="number" min="0.00" max="100.00" step="0.01" id="price" name="price" th:value="*{price}"
+             class="form-control ms-5 me-5" th:placeholder="#{price}"
+             required>
+      <span th:errors="*{price}" class="text-danger"></span>
+    </div>
+    <div th:each="location, status : *{locations}" class="form-group m-5 gap-1" id="locationContainer">
+      <label th:text="'Location ' + (${status.index} + 1) + ':'"></label>
+      <input type="number"  max="300" step="1" th:field="*{locations[__${status.index}__].placeCode1}"
+             class="form-control ms-5 me-5 mb-1"/>
+      <input type="number"  max="300" step="1" th:field="*{locations[__${status.index}__].placeCode2}"
+
+             class="form-control ms-5 me-5 mb-1"/>
+      <input type="text" th:field="*{locations[__${status.index}__].placeName}" th:placeholder="#{placeName}"
+             class="form-control ms-5 me-5"/>
+      <br/>
+      <span th:errors="*{locations}" class="text-danger"></span>
+    </div>
+
+<div class="card-footer d-flex justify-content-end">
+  <button type="submit" class="btn btn-success ml-5 ms-auto" th:text="Submit"></button>
+</div>
 
 
 

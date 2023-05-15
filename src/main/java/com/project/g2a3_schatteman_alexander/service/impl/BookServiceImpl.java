@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -15,14 +16,16 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepo;
 
+
+
     @Override
-    public List<Book> getALL() {
+    public List<Book> getAll() {
         return (List<Book>) bookRepo.findAll();
     }
 
     @Override
-    public Book getBookById(Integer id) {
-        return null;
+    public Book getBookById(Long id) {
+        return bookRepo.findById(id).orElseThrow();
     }
 
     @Override

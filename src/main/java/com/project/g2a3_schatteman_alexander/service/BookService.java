@@ -4,13 +4,14 @@ import com.project.g2a3_schatteman_alexander.entities.Author;
 import com.project.g2a3_schatteman_alexander.entities.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface BookService {
 
-    List<Book> getALL();
+    List<Book> getAll();
 
-    Book getBookById(Integer id);
+    Book getBookById(Long id);
 
     void addBook(Book book);
 
