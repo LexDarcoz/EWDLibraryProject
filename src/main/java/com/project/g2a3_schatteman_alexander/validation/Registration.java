@@ -1,11 +1,13 @@
 package com.project.g2a3_schatteman_alexander.validation;
 
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -26,7 +28,6 @@ public class Registration {
 
     @NotBlank(message = "{validation.confirmPassword.notBlank}")
     private String confirmPassword;
-
 
 
     public Registration() {

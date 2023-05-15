@@ -2,6 +2,7 @@ package com.project.g2a3_schatteman_alexander.controller;
 
 import com.project.g2a3_schatteman_alexander.entities.Author;
 import com.project.g2a3_schatteman_alexander.entities.Book;
+import com.project.g2a3_schatteman_alexander.repository.AuthorRepository;
 import com.project.g2a3_schatteman_alexander.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

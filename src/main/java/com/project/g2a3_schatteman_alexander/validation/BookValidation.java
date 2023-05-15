@@ -20,7 +20,7 @@ public class BookValidation implements Validator {
             errors.rejectValue("authors", "author.empty", "There must be at least 1 author!");
         } else {
             Author author = book.getAuthors().get(0);
-            if (author.getFirstName().isBlank() && author.getLastName().isBlank()) {
+            if (author.getFirstname().isBlank() && author.getLastname().isBlank()) {
                 errors.rejectValue("authors", "author.primaryEmpty", "There must be a primary author!");
             }
         }
@@ -40,11 +40,11 @@ public class BookValidation implements Validator {
         if (book.getLocations().isEmpty()) {
             errors.rejectValue("locations", "location.empty", "There must be at least 1 location!");
         } else {
-            if (book.getLocations().get(0).getPlaceCode1()==0 || book.getLocations().get(0).getPlaceCode2()==0 || book.getLocations().get(0).getPlaceName().isBlank()) {
+            if (book.getLocations().get(0).getPlaceCode1() == 0 || book.getLocations().get(0).getPlaceCode2() == 0 || book.getLocations().get(0).getPlaceName().isBlank()) {
                 errors.rejectValue("locations", "location.primaryEmpty", "There must be a primary location!");
             }
             for (Location location : book.getLocations()) {
-                if (!(location.getPlaceCode1()==0 || location.getPlaceCode2()==0)) {
+                if (!(location.getPlaceCode1() == 0 || location.getPlaceCode2() == 0)) {
                     if (location.getPlaceCode1() < 50 || location.getPlaceCode2() < 50) {
                         errors.rejectValue("locations", "location.code", "The place codes must be greater than 50!");
                     }
@@ -78,7 +78,7 @@ public class BookValidation implements Validator {
                 }
             }
         } else {
-            if (!isbn.matches("[0-9]+" )){
+            if (!isbn.matches("[0-9]+")) {
                 return false;
             }
             // For a 13-digit ISBN, multiply each digit by either 1 or 3 (alternating) and sum the results

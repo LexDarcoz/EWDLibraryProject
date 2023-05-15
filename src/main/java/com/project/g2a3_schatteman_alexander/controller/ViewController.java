@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class ViewController {
-
+    @RequestMapping("/")
+    public String showHome() {
+        return "redirect:/library";
+    }
 
 
 }
