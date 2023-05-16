@@ -1,4 +1,4 @@
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
@@ -17,17 +17,18 @@
                 data-bs-target="#navbarTogglerDemo03" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">ISBN</a>
+        <a class="navbar-brand" href="/">ISBN</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" href="/home">Home</a>
+                    <a aria-current="page" class="nav-link active" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="addBook" sec:authorize="hasAuthority('ADMIN')">Add book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="showEmployees">Employee List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="addEmployeeForm">Add book</a>
+                    <a class="nav-link" href="/top10">Popular books</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
@@ -36,7 +37,7 @@
                     </a>
                     <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Edit account</a></li>
-                        <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                        <li><a class="dropdown-item" href="#">Favorited</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

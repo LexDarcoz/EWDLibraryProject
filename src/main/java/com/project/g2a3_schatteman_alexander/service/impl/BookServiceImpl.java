@@ -39,6 +39,11 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
+    public List<Book> getTop10() {
+        return bookRepo.findTop10ByOrderByStarsDescNameAsc();
+    }
+
+    @Override
     public Book getByISBN(String isbn) {
         Book book = bookRepo.findByISBNnumber(isbn);
         return book;

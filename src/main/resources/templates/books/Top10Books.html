@@ -2,10 +2,7 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-          name="viewport">
-    <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <title>Library</title>
+    <title>Popular books</title>
     <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
 
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -17,14 +14,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.js"></script>
-    <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"-->
-    <!--          rel="stylesheet">-->
 </head>
 <body>
 <header th:insert="~{components/navbar}"></header>
 
 <div class="container">
-    <h2>Library</h2>
+    <h2>Top 10 books</h2>
     <hr/>
     <br/>
 
@@ -37,7 +32,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book: ${bookList}">
+        <tr th:each="book: ${books}">
             <td th:text="${book.name}"/>
             <td>
                 <p th:if="${book.authors.isEmpty()}" th:text="Anonymous"></p>
@@ -50,7 +45,7 @@
                    th:href="@{/showUpdateForm(bookId=${book.id})}">Update</a>
                 <a class="btn btn-danger ml-3" sec:authorize="hasAuthority('ADMIN')"
                    th:href="@{/deleteEmployee(bookId=${book.id})}">Delete</a>
-                <a class="btn btn-danger ml-3" th:href="@{/library/{id}(id=${book.id})}">Details</a>
+                <a class="btn btn-danger ml-3" th:href="@{/(bookId=${book.id})}">Details</a>
 
             </td>
         </tr>
@@ -68,6 +63,5 @@
         });
     })
 </script>
-
 </body>
 </html>

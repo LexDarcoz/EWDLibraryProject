@@ -31,29 +31,29 @@ public class BookController {
     @Autowired
     private BookService service;
 
-    @GetMapping("/library")
+    @GetMapping({"/library", "/"})
     public ModelAndView showBooksByPage() {
         books = service.getAll();
         ModelAndView mav = new ModelAndView("books/LibraryBooks", "bookList", books);
         return mav;
     }
 
-    @GetMapping("/{id}")
-    public String showBookById(@PathVariable Long id, Model model) {
-        User user = userService.getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+    @GetMapping("/library/{id}")
+    public ModelAndView showBookById(@PathVariable Long id) {
+//        User user = userService.getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         Book book = service.getBookById(id);
-        if (book == null) {
-            return "redirect:/error";
-        }
-        model.addAttribute("book", book);
-        model.addAttribute("user", user);
-        return "bookDetails";
-    }
+        ModelAndView mav = new ModelAndView();
 
-    @GetMapping
-    public String getBooks(Model model) {
-//        model.addAttribute("bookList", service.getAll());
-        return "redirect:/books/1";
+//        if (book == null) {
+//            mav.setViewName("error");
+//            return mav;
+//        }
+
+
+        mav.addObject("books", book);
+//        mav.addObject("user", user);
+        mav.setViewName("books/BookDetailPage");
+        return mav;
     }
 
     @PostMapping("/new")
@@ -66,6 +66,15 @@ public class BookController {
         return "redirect:/books/1";
     }
 
+    @GetMapping("/top10")
+    public ModelAndView getTop10() {
+        List<Book> book = service.getTop10();
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("books", book);
+        mav.setViewName("books/Top10Books");
+        return mav;
+    }
 
     @GetMapping("/favorite")
     public String getFavorites(Model model) {

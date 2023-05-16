@@ -13,6 +13,8 @@ public interface BookService {
 
     Book getBookById(Long id);
 
+    List<Book> getTop10();
+
     void addBook(Book book);
 
     Book getByISBN(String isbn);

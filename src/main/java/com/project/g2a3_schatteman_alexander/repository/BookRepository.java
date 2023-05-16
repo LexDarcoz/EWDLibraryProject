@@ -13,7 +13,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     List<Book> findBookByAuthors(Author author);
 
-    List<Book> findTop10ByOrderByStarsDescNameDesc();
+    List<Book> findTop10ByOrderByStarsDescNameAsc();
 
     Book findByISBNnumber(String isbn);
 

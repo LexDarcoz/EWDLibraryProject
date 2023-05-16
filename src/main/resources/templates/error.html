@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Something went wrong!</title>
+</head>
+<body>
+<header th:insert="~{components/navbar}"></header>
+<div class="d-flex flex-column justify-content-center align-items-center gap-5 p-3">
+    <h1>Error</h1>
+    <table class="table table-bordered w-75">
+
+        <tr>
+            <td>Date</td>
+            <td th:text="${timestamp}"/>
+        </tr>
+        <tr>
+            <td>Path</td>
+            <td th:text="${path}"/>
+        </tr>
+        <tr>
+            <td>Error</td>
+            <td th:text="${error}"/>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td th:text="${status}"/>
+        </tr>
+
+        <tr>
+            <td>Message</td>
+            <td th:text="${message}"/>
+        </tr>
+
+
+    </table>
+</div>
+</body>
+</html>
