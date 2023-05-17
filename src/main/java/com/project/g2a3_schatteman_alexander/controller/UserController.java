@@ -32,11 +32,8 @@ public class UserController {
             return "register";
         }
 
-        User user = new User();
-        user.setFirstname(registration.getFirstName());
-        user.setLastname(registration.getLastName());
-        user.setEmail(registration.getEmail());
-        user.setPassword(registration.getPassword());
+        User user = new User(registration.getFirstName(), registration.getLastName(), registration.getEmail(), registration.getPassword());
+     
 
         userService.addUser(user);
         return "redirect:/login";
@@ -44,32 +41,21 @@ public class UserController {
 
     @PostMapping("/favorite/add/{id}")
     public String addFavorite(@PathVariable("id") Long id, Model model) {
-        System.out.println("add favorite");
         Book response = userService.addFavorite(id);
-        System.out.println("returning");
-
-        System.err.println("bad request");
-
         User user = userService.getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("book", response);
         model.addAttribute("user", user);
         model.addAttribute("status", "added");
-        return "redirect:/books/detail/" + id + "?status=added";
+        return "redirect:/library/" + id + "?status=added";
     }
 
     @PostMapping("/favorite/remove/{id}")
     public String removeFavorite(@PathVariable("id") Long id, Model model) {
-        System.out.println("remove favorite");
         Book response = userService.removeFavorite(id);
-        System.out.println("returning");
-//        if (!response) {
-        System.err.println("bad request");
-//            return ResponseEntity.badRequest().build();
-//        }
         User user = userService.getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("book", response);
         model.addAttribute("user", user);
-        return "redirect:/books/detail/" + id + "?status=removed";
+        return "redirect:/library/" + id + "?status=removed";
     }
 }
 

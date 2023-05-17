@@ -53,7 +53,9 @@ public class User {
     }
 
     public User(String firstname, String lastname, String password, String email) {
+
         this(firstname, lastname, password, email, "USER", new ArrayList<>(), 10);
+        System.out.println("Making new user");
     }
 
     public User() {
@@ -75,9 +77,6 @@ public class User {
         this.firstname = firstname;
     }
 
-//    public String getSalt() {
-//        return salt;
-//    }
 
     public String getLastname() {
         return lastname;

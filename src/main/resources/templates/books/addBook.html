@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+  <title th:text="#{addBook}">Add a new book</title>
   <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
   <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
@@ -11,103 +10,68 @@
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <button aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler"
-            data-bs-target="#navbarTogglerDemo03" data-bs-toggle="collapse" type="button">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">ISBN</a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a aria-current="page" class="nav-link active" href="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="addBook">Add book</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-             id="navbarDropdown" role="button">
-            Account
-          </a>
-          <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Edit account</a></li>
-            <li><a class="dropdown-item" href="#">Wishlist</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input aria-label="Search" class="form-control me-2" placeholder="Search" type="search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<header th:insert="~{components/navbar}"></header>
+<div class="d-flex justify-content-center p-5">
+  <form method="post" th:action="@{/library/newBook}" th:object="${book}" class="card mb-3"
+        data-bitwarden-watching="1" style="max-width: 512px">
+    <h2 class="card-header text-center" th:text="#{addBook}"></h2>
+    <div class="card-body p-2 justify-content-center">
+      <div class="form-group m-5">
+        <label for="name" th:text="#{title}"></label>
+        <input type="text" id="name" name="name" th:value="*{name}" class="form-control ms-5 me-5"
+               th:placeholder="#{title}" required>
+        <div th:errors="*{name}" class="text-danger"></div>
+      </div>
+      <div class="form-group m-5">
+        <label for="ISBNnumber" th:text="ISBN"></label>
+        <input type="text" id="ISBNnumber" name="ISBNnumber" th:value="*{ISBNnumber}"
+               class="form-control ms-5 me-5" th:placeholder="ISBN" required>
+        <span th:errors="*{ISBNnumber}" class="text-danger"></span>
+        <br>
+        <label for="price" th:text="#{price}"></label>
+        <input type="number" min="0.00" max="100.00" step="0.01" id="price" name="price" th:value="*{price}"
+               class="form-control ms-5 me-5" th:placeholder="#{price}" required>
+        <span th:errors="*{price}" class="text-danger"></span>
+      </div>
+      <div th:each="author, status : *{authors}" class="form-group m-5 gap-2" id="authorContainer">
+        <label th:text="#{author} + ' ' + (${status.index} + 1) + ':'"></label>
+        <input type="text" th:field="*{authors[__${status.index}__].firstname}" placeholder="First name"
+               class="form-control ms-5 me-5 mb-1"/>
+        <input type="text" th:field="*{authors[__${status.index}__].lastname}" placeholder="Last name"
+               class="form-control ms-5 me-5"/>
+        <span th:errors="*{authors}" class="text-danger"></span>
+        <br/>
+      </div>
+
+      <div th:each="location, status : *{locations}" class="form-group m-5 gap-1" id="locationContainer">
+        <label th:text="'Location ' + (${status.index} + 1) + ':'"></label>
+        <input type="number" max="300" step="1" th:field="*{locations[__${status.index}__].placeCode1}"
+               class="form-control ms-5 me-5 mb-1"/>
+        <input type="number" max="300" step="1" th:field="*{locations[__${status.index}__].placeCode2}"
+               class="form-control ms-5 me-5 mb-1"/>
+        <input type="text" th:field="*{locations[__${status.index}__].placeName}" th:placeholder="#{placeName}"
+               class="form-control ms-5 me-5"/>
+        <br/>
+        <span th:errors="*{locations}" class="text-danger"></span>
+      </div>
     </div>
-  </div>
-</nav>
-<div class="container">
-
-  <h2>Add Employee</h2>
-  <hr/>
-  <form method="post" th:action="@{/saveEmployee}" th:object="${book}">
-    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{name}" type="text">
-    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{authors}" type="text">
-    <input class="form-control col-4 mb-4" placeholder="Enter name" th:field="*{price}" type="text">
-    <div th:each="author, status : *{authors}" class="form-group m-5 gap-2" id="authorContainer">
-      <label th:text="#{author} + ' ' + (${status.index} + 1) + ':'"></label>
-      <input type="text" th:field="*{authors[__${status.index}__].firstname}" placeholder="First name"
-             class="form-control ms-5 me-5 mb-1"/>
-      <input type="text" th:field="*{authors[__${status.index}__].lastname}" placeholder="Last name"
-             class="form-control ms-5 me-5"/>
-      <span th:errors="*{authors}"></span>
-      <br/>
+    <div class="card-footer d-flex justify-content-end">
+      <button type="submit" class="btn btn-success ml-5 ms-auto">
+        <i class="fas fa-check"></i> Submit
+      </button>
     </div>
-    <div class="form-group m-5">
-      <label for="ISBNnumber" th:text="ISBN"></label>
-      <input type="text" id="ISBNnumber" name="ISBNnumber" th:value="*{ISBNnumber}"
-             class="form-control ms-5 me-5" th:placeholder="ISBN"
-             required>
-      <span th:errors="*{ISBNnumber}" class="text-danger"></span>
-      <br>
-      <label for="price" th:text="#{price}"></label>
-      <input type="number" min="0.00" max="100.00" step="0.01" id="price" name="price" th:value="*{price}"
-             class="form-control ms-5 me-5" th:placeholder="#{price}"
-             required>
-      <span th:errors="*{price}" class="text-danger"></span>
-    </div>
-    <div th:each="location, status : *{locations}" class="form-group m-5 gap-1" id="locationContainer">
-      <label th:text="'Location ' + (${status.index} + 1) + ':'"></label>
-      <input type="number"  max="300" step="1" th:field="*{locations[__${status.index}__].placeCode1}"
-             class="form-control ms-5 me-5 mb-1"/>
-      <input type="number"  max="300" step="1" th:field="*{locations[__${status.index}__].placeCode2}"
-
-             class="form-control ms-5 me-5 mb-1"/>
-      <input type="text" th:field="*{locations[__${status.index}__].placeName}" th:placeholder="#{placeName}"
-             class="form-control ms-5 me-5"/>
-      <br/>
-      <span th:errors="*{locations}" class="text-danger"></span>
-    </div>
-
-<div class="card-footer d-flex justify-content-end">
-  <button type="submit" class="btn btn-success ml-5 ms-auto" th:text="Submit"></button>
-</div>
-
-
-
-
-    <button class="btn btn-primary" type="submit">Save</button>
-    <input th:field="*{id}" type="hidden">
   </form>
-  <hr/>
-  <a class="btn btn-error" th:href="@{/showEmployees}">Back to list</a>
-
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>
 </body>

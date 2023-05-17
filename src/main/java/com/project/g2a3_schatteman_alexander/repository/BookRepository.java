@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
 
-    List<Book> findBookByAuthors(Author author);
+    List<Book> findBooksByAuthors(Author author);
 
     List<Book> findTop10ByOrderByStarsDescNameAsc();
 

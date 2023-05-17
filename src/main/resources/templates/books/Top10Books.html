@@ -26,13 +26,16 @@
     <table class="table table-bordered table-striped" id="booksTable">
         <thead>
         <tr>
+            <th>Rank</th>
             <th>Title</th>
             <th>Authors</th>
+            <th>Rating</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book: ${books}">
+        <tr th:each="book, rank: ${books}">
+            <td th:text="${rank.count}"></td>
             <td th:text="${book.name}"/>
             <td>
                 <p th:if="${book.authors.isEmpty()}" th:text="Anonymous"></p>
@@ -40,13 +43,11 @@
                     <li th:text="(${author.firstname} + ' ' + ${author.lastname})"></li>
                 </ul>
             </td>
+            <td th:text="${book.getStars()}"></td>
             <td>
-                <a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')"
-                   th:href="@{/showUpdateForm(bookId=${book.id})}">Update</a>
+                <a class="btn btn-success ml-3" th:href="@{library/{id}(id=${book.id})}">Details</a>
                 <a class="btn btn-danger ml-3" sec:authorize="hasAuthority('ADMIN')"
                    th:href="@{/deleteEmployee(bookId=${book.id})}">Delete</a>
-                <a class="btn btn-danger ml-3" th:href="@{/(bookId=${book.id})}">Details</a>
-
             </td>
         </tr>
         </tbody>

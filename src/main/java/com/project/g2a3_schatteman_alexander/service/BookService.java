@@ -19,9 +19,7 @@ public interface BookService {
 
     Book getByISBN(String isbn);
 
-    void updateBookById(long id);
-
-    void deleteBookById(long id);
+    void deleteByBookId(long id);
 
     List<Book> getByAuthor(Author author);
 

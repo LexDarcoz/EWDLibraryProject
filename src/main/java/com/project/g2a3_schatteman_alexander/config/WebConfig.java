@@ -20,7 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
         return slr;
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
