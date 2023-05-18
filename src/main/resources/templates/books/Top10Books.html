@@ -47,7 +47,7 @@
             <td>
                 <a class="btn btn-success ml-3" th:href="@{library/{id}(id=${book.id})}">Details</a>
                 <a class="btn btn-danger ml-3" sec:authorize="hasAuthority('ADMIN')"
-                   th:href="@{/deleteEmployee(bookId=${book.id})}">Delete</a>
+                   th:href="@{/library/delete/{id}(id=${book.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

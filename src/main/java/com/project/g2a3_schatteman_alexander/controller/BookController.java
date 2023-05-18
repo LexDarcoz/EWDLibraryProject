@@ -64,7 +64,7 @@ public class BookController {
         return mav;
     }
 
-    @PostMapping("/library/newBook")
+    @PostMapping("/admin/newBook")
     public String onSubmit(@Valid Book book, BindingResult result, Model model) {
         validator.validate(book, result);
         if (result.hasErrors()) {
@@ -88,7 +88,7 @@ public class BookController {
         return mav;
     }
 
-    @RequestMapping("/library/addBook")
+    @RequestMapping("/admin/addBook")
     public String showForm(Model model) {
         Book book = new Book();
         List<Author> authors = new ArrayList<>();

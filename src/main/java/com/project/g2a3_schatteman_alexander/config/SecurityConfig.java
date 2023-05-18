@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests().requestMatchers("/register/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/library/addBook", "/library/delete/*").hasAuthority("ADMIN")
+                .authorizeHttpRequests().requestMatchers("/admin/addBook", "/library/delete/*").hasAuthority("ADMIN")
                 .and().formLogin()
                 .defaultSuccessUrl("/")
 //                .failureUrl("/error")
