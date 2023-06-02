@@ -16,7 +16,7 @@
 <body>
 <header th:insert="~{components/navbar}"></header>
 <div class="d-flex justify-content-center p-5">
-  <form method="post" th:action="@{/library/newBook}" th:object="${book}" class="card mb-3"
+  <form method="post" th:action="@{/admin/newBook}" th:object="${book}" class="card mb-3"
         data-bitwarden-watching="1" style="max-width: 512px">
     <h2 class="card-header text-center" th:text="#{addBook}"></h2>
     <div class="card-body p-2 justify-content-center">

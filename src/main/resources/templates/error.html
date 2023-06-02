@@ -2,38 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <meta charset="UTF-8">
-    <title>Something went wrong!</title>
+    <title>Error Page</title>
+    <style>
+        /* CSS styles for error message layout */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-<header th:insert="~{components/navbar}"></header>
-<div class="d-flex flex-column justify-content-center align-items-center gap-5 p-3">
+<div class="error-container">
     <h1>Error</h1>
-    <table class="table table-bordered w-75">
-
+    <table>
         <tr>
-            <td>Date</td>
-            <td th:text="${timestamp}"/>
+            <td>Date:</td>
+            <td th:text="${timestamp}"></td>
         </tr>
         <tr>
-            <td>Path</td>
-            <td th:text="${path}"/>
+            <td>Path:</td>
+            <td th:text="${path}"></td>
         </tr>
         <tr>
-            <td>Error</td>
-            <td th:text="${error}"/>
+            <td>Error:</td>
+            <td th:text="${error}"></td>
         </tr>
         <tr>
-            <td>Status</td>
-            <td th:text="${status}"/>
+            <td>Status:</td>
+            <td th:text="${status}"></td>
         </tr>
-
         <tr>
-            <td>Message</td>
-            <td th:text="${message}"/>
+            <td>Message:</td>
+            <td th:text="${message}"></td>
         </tr>
-
-
     </table>
 </div>
 </body>

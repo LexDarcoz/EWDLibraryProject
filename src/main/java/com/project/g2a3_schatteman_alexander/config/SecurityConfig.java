@@ -27,6 +27,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
+                .authorizeHttpRequests().requestMatchers("/api/**").permitAll()
+                .and()
                 .authorizeHttpRequests().requestMatchers("/library", "/library/*", "/user/new", "/library/favorite", "/user/favorite/*", "/user/favorite/add/*", "/user/favorite/remove/*", "/api/**, ").hasAuthority("USER")
                 .and()
                 .authorizeHttpRequests().requestMatchers("/components/**", "/*").permitAll()
@@ -35,7 +37,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests().requestMatchers("/register/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/admin/addBook", "/library/delete/*").hasAuthority("ADMIN")
+                .authorizeHttpRequests().requestMatchers("/admin/*", "/library/delete/*").hasAuthority("ADMIN")
                 .and().formLogin()
                 .defaultSuccessUrl("/")
 //                .failureUrl("/error")
